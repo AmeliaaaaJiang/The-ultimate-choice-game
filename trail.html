@@ -1,0 +1,3141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>角角落落不辱怎么追</title>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+/* =========================================================
+   DESIGN SYSTEM
+========================================================= */
+
+:root {
+    --bg: #d9dde3;
+    --bg-2: #e1e5ea;
+    --panel: #e8ebef;
+    --panel-light: #eef0f3;
+    --silver: #bcc4ce;
+    --silver-blue: #8795a8;
+    --silver-blue-light: #aab5c2;
+    --deep: #405064;
+    --deep-2: #313e4d;
+    --text: #303a47;
+    --muted: rgba(48, 58, 71, .54);
+    --line: rgba(48, 58, 71, .17);
+    --line-strong: rgba(48, 58, 71, .32);
+    --white: #f5f6f8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--text);
+
+    font-family:
+        "Source Han Serif SC",
+        "Noto Serif SC",
+        "Songti SC",
+        "STSong",
+        serif;
+
+    overflow-x: hidden;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   GLOBAL PAGE
+========================================================= */
+
+.page {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    padding:
+        max(20px, env(safe-area-inset-top))
+        18px
+        max(20px, env(safe-area-inset-bottom));
+
+    overflow: hidden;
+}
+
+.page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(48,58,71,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(48,58,71,.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 42px 42px;
+}
+
+.page::after {
+    content: "";
+    position: absolute;
+
+    width: 520px;
+    height: 520px;
+
+    left: 50%;
+    top: 52%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.38);
+
+    pointer-events: none;
+    opacity: .62;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar {
+    position: relative;
+    z-index: 5;
+
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding-bottom: 13px;
+
+    border-bottom: 1px solid var(--line);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 8px;
+    letter-spacing: .14em;
+
+    color: var(--muted);
+}
+
+.top-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tiny-diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--silver-blue);
+    transform: rotate(45deg);
+}
+
+
+/* =========================================================
+   EMOJIS
+========================================================= */
+
+.emoji-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+
+    font-family:
+        Apple Color Emoji,
+        Segoe UI Emoji,
+        sans-serif;
+}
+
+.emoji-row span {
+    display: inline-block;
+    font-size: 20px;
+}
+
+.emoji-row span:nth-child(odd) {
+    transform: translateY(-2px) rotate(-5deg);
+}
+
+.emoji-row span:nth-child(even) {
+    transform: rotate(4deg);
+}
+
+.floating-emoji {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    user-select: none;
+    opacity: .62;
+
+    font-family:
+        Apple Color Emoji,
+        Segoe UI Emoji,
+        sans-serif;
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-main {
+    position: relative;
+    z-index: 3;
+
+    flex: 1;
+
+    width: 100%;
+    max-width: 760px;
+
+    margin: auto;
+
+    padding: 42px 0 32px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.home-id {
+    margin-bottom: 20px;
+    font-size: 8px;
+    letter-spacing: .28em;
+    color: var(--muted);
+}
+
+.home-eyebrow {
+    margin-top: 23px;
+    margin-bottom: 13px;
+    margin-left: .42em;
+
+    font-size: 10px;
+    letter-spacing: .42em;
+
+    color: rgba(48,58,71,.62);
+}
+
+.home-title {
+    font-size: clamp(39px, 11.5vw, 72px);
+    line-height: 1.27;
+    font-weight: 500;
+    letter-spacing: .025em;
+
+    color: var(--deep);
+}
+
+.title-decoration {
+    margin: 27px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.title-decoration span {
+    width: 46px;
+    height: 1px;
+    background: rgba(48,58,71,.31);
+}
+
+.title-decoration i {
+    width: 7px;
+    height: 7px;
+    border: 1px solid rgba(48,58,71,.60);
+    transform: rotate(45deg);
+}
+
+.home-notice {
+    position: relative;
+    width: 100%;
+    max-width: 430px;
+
+    padding: 23px 22px;
+
+    background: rgba(236,239,242,.63);
+    border: 1px solid var(--line-strong);
+}
+
+.home-notice::before,
+.home-notice::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+
+.home-notice::before {
+    left: -1px;
+    top: -1px;
+    border-left: 2px solid var(--deep);
+    border-top: 2px solid var(--deep);
+}
+
+.home-notice::after {
+    right: -1px;
+    bottom: -1px;
+    border-right: 2px solid var(--deep);
+    border-bottom: 2px solid var(--deep);
+}
+
+.notice-title {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: .17em;
+    margin-left: .17em;
+}
+
+.short-line {
+    width: 27px;
+    height: 1px;
+    margin: 13px auto;
+    background: rgba(48,58,71,.30);
+}
+
+.notice-text {
+    font-size: 10px;
+    line-height: 1.9;
+    letter-spacing: .06em;
+    color: rgba(48,58,71,.62);
+}
+
+.home-meta {
+    width: 100%;
+    max-width: 430px;
+
+    margin-top: 16px;
+
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 7px;
+}
+
+.meta-card {
+    min-height: 56px;
+
+    padding: 9px 6px;
+
+    background: rgba(238,240,243,.45);
+    border: 1px solid var(--line);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.meta-card small {
+    font-family: Georgia, serif;
+    font-size: 7px;
+    letter-spacing: .11em;
+    color: var(--muted);
+}
+
+.meta-card strong {
+    margin-top: 5px;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.mode-label {
+    margin-top: 22px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 9px;
+    letter-spacing: .15em;
+
+    color: rgba(48,58,71,.64);
+}
+
+.mode-label i {
+    width: 5px;
+    height: 5px;
+    background: var(--silver-blue);
+    transform: rotate(45deg);
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.primary-button {
+    width: 100%;
+    min-height: 62px;
+
+    border: 1px solid var(--deep);
+    background: var(--deep);
+    color: var(--white);
+
+    cursor: pointer;
+
+    transition:
+        transform .16s ease,
+        background .16s ease;
+}
+
+.primary-button:hover {
+    background: #536274;
+    transform: translateY(-2px);
+}
+
+.primary-button:active {
+    transform: scale(.985);
+}
+
+.primary-button span {
+    display: block;
+
+    font-size: 17px;
+    letter-spacing: .26em;
+    margin-left: .26em;
+}
+
+.primary-button small {
+    display: block;
+    margin-top: 4px;
+
+    font-family: Georgia, serif;
+    font-size: 7px;
+    letter-spacing: .40em;
+
+    opacity: .53;
+}
+
+.primary-wrap {
+    width: 100%;
+    max-width: 340px;
+    margin-top: 37px;
+}
+
+
+/* =========================================================
+   RULES
+========================================================= */
+
+.rules {
+    width: 100%;
+    max-width: 340px;
+    margin-top: 14px;
+}
+
+.rules summary {
+    list-style: none;
+    padding: 8px;
+
+    cursor: pointer;
+
+    font-size: 9px;
+    letter-spacing: .14em;
+
+    color: rgba(48,58,71,.60);
+}
+
+.rules summary::-webkit-details-marker {
+    display: none;
+}
+
+.rules-body {
+    margin-top: 8px;
+    padding: 15px;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+
+    text-align: left;
+
+    font-size: 10px;
+    line-height: 1.9;
+
+    color: rgba(48,58,71,.68);
+}
+
+.rules-body p + p {
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+    position: relative;
+    z-index: 4;
+
+    width: 100%;
+    max-width: 1100px;
+
+    margin: auto auto 0;
+
+    padding-top: 12px;
+
+    border-top: 1px solid var(--line);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 6px;
+    letter-spacing: .10em;
+
+    color: rgba(48,58,71,.42);
+}
+
+
+/* =========================================================
+   GAME PAGE
+========================================================= */
+
+.game-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.game-header {
+    position: relative;
+    z-index: 4;
+
+    width: 100%;
+    max-width: 1050px;
+
+    margin: 0 auto;
+
+    padding-bottom: 13px;
+
+    border-bottom: 1px solid var(--line);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-logo {
+    font-size: 9px;
+    letter-spacing: .06em;
+    color: rgba(48,58,71,.56);
+}
+
+.game-round-small {
+    font-family: Georgia, serif;
+    font-size: 9px;
+    letter-spacing: .16em;
+    color: rgba(48,58,71,.52);
+}
+
+.round-info {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    max-width: 620px;
+
+    margin: 31px auto 0;
+
+    text-align: center;
+}
+
+.round-name {
+    font-size: 10px;
+    letter-spacing: .28em;
+    margin-left: .28em;
+
+    color: rgba(48,58,71,.58);
+}
+
+.round-flow {
+    margin-top: 8px;
+
+    font-family: Georgia, serif;
+    font-size: 31px;
+
+    color: var(--deep);
+}
+
+.round-counter {
+    margin-top: 9px;
+
+    font-family: Georgia, serif;
+    font-size: 9px;
+    letter-spacing: .12em;
+
+    color: rgba(48,58,71,.52);
+}
+
+.progress {
+    width: 100%;
+    max-width: 400px;
+    height: 3px;
+
+    margin: 16px auto 0;
+
+    background: rgba(48,58,71,.12);
+
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--deep);
+    width: 0%;
+    transition: width .2s ease;
+}
+
+.mood-strip {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    max-width: 500px;
+
+    margin: 18px auto 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+}
+
+.mood-strip span {
+    font-size: 18px;
+    font-family:
+        Apple Color Emoji,
+        Segoe UI Emoji,
+        sans-serif;
+}
+
+.mood-strip small {
+    font-size: 8px;
+    letter-spacing: .08em;
+    color: var(--muted);
+}
+
+.bye-note {
+    position: relative;
+    z-index: 3;
+
+    margin: 13px auto 0;
+
+    text-align: center;
+
+    font-size: 8px;
+    letter-spacing: .06em;
+
+    color: rgba(48,58,71,.52);
+}
+
+.question {
+    position: relative;
+    z-index: 3;
+
+    margin: 26px auto 19px;
+
+    text-align: center;
+
+    font-size: 12px;
+    letter-spacing: .05em;
+
+    color: rgba(48,58,71,.71);
+}
+
+.question strong {
+    color: var(--deep-2);
+    font-weight: 600;
+}
+
+.pk-area {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    max-width: 920px;
+
+    margin: auto;
+
+    display: grid;
+    grid-template-columns:
+        minmax(0,1fr)
+        72px
+        minmax(0,1fr);
+
+    gap: 10px;
+
+    align-items: stretch;
+}
+
+.choice-card {
+    position: relative;
+
+    width: 100%;
+    min-height: 310px;
+
+    padding: 23px 22px;
+
+    border: 1px solid var(--line-strong);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(241,243,246,.65),
+            rgba(228,232,237,.72)
+        );
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    overflow: hidden;
+
+    transition:
+        transform .15s ease,
+        color .15s ease,
+        background .15s ease,
+        border-color .15s ease;
+}
+
+.choice-card:hover {
+    transform: translateY(-3px);
+    background: var(--deep);
+    color: var(--white);
+    border-color: var(--deep);
+}
+
+.choice-card:active {
+    transform: scale(.985);
+}
+
+.choice-card::before {
+    content: "";
+    position: absolute;
+
+    width: 110px;
+    height: 110px;
+
+    top: -55px;
+    right: -55px;
+
+    border-radius: 50%;
+    background: rgba(135,149,168,.09);
+}
+
+.choice-label {
+    width: 100%;
+    text-align: left;
+
+    font-family: Georgia, serif;
+    font-size: 8px;
+    letter-spacing: .16em;
+
+    opacity: .50;
+}
+
+.choice-inner-emoji {
+    margin-top: 5px;
+
+    font-size: 22px;
+
+    font-family:
+        Apple Color Emoji,
+        Segoe UI Emoji,
+        sans-serif;
+}
+
+.choice-text {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size: clamp(18px,2.7vw,28px);
+    line-height: 1.65;
+
+    font-weight: 500;
+
+    overflow-wrap: anywhere;
+}
+
+.choice-bottom {
+    width: 100%;
+
+    padding-top: 12px;
+
+    border-top: 1px solid currentColor;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    font-size: 8px;
+    letter-spacing: .08em;
+
+    opacity: .47;
+}
+
+.vs-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vs-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.vs-inner strong {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: rgba(48,58,71,.52);
+}
+
+.vs-inner span {
+    font-size: 22px;
+
+    font-family:
+        Apple Color Emoji,
+        Segoe UI Emoji,
+        sans-serif;
+}
+
+.game-tip {
+    position: relative;
+    z-index: 3;
+
+    margin: 26px auto;
+
+    text-align: center;
+
+    font-size: 8px;
+    letter-spacing: .06em;
+
+    color: rgba(48,58,71,.50);
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.result-page {
+    overflow: visible;
+}
+
+.result-header {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    max-width: 760px;
+
+    margin: 42px auto 0;
+
+    text-align: center;
+}
+
+.result-game-name {
+    font-size: 9px;
+    letter-spacing: .14em;
+    color: var(--muted);
+}
+
+.result-title {
+    margin-top: 16px;
+
+    font-size: clamp(42px,9vw,70px);
+    line-height: 1.25;
+
+    font-weight: 500;
+    letter-spacing: .06em;
+
+    color: var(--deep);
+}
+
+.result-emojis {
+    margin-top: 17px;
+
+    font-size: 18px;
+    letter-spacing: .14em;
+
+    font-family:
+        Apple Color Emoji,
+        Segoe UI Emoji,
+        sans-serif;
+}
+
+.champion-box {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    max-width: 650px;
+
+    margin: 42px auto 0;
+
+    padding: 37px 27px;
+
+    text-align: center;
+
+    background: var(--panel);
+    border: 1px solid var(--line-strong);
+}
+
+.champion-box::before,
+.champion-box::after {
+    content: "";
+    position: absolute;
+
+    width: 22px;
+    height: 22px;
+}
+
+.champion-box::before {
+    left: -1px;
+    top: -1px;
+    border-left: 2px solid var(--deep);
+    border-top: 2px solid var(--deep);
+}
+
+.champion-box::after {
+    right: -1px;
+    bottom: -1px;
+    border-right: 2px solid var(--deep);
+    border-bottom: 2px solid var(--deep);
+}
+
+.champion-number {
+    font-family: Georgia, serif;
+    font-size: 8px;
+    letter-spacing: .27em;
+    color: var(--muted);
+}
+
+.champion-label {
+    margin-top: 12px;
+
+    font-size: 14px;
+    letter-spacing: .30em;
+    margin-left: .30em;
+
+    color: var(--silver-blue);
+}
+
+.champion-name {
+    margin-top: 25px;
+
+    font-size: clamp(23px,6vw,39px);
+    line-height: 1.55;
+
+    font-weight: 500;
+
+    color: var(--deep-2);
+}
+
+.champion-note {
+    margin-top: 23px;
+
+    font-size: 8px;
+    letter-spacing: .08em;
+
+    color: var(--muted);
+}
+
+.top-three {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    max-width: 650px;
+
+    margin: 12px auto 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.rank-row {
+    min-height: 64px;
+
+    padding: 13px 17px;
+
+    background: rgba(238,240,243,.55);
+    border: 1px solid var(--line);
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+}
+
+.rank-row:first-child {
+    border-color: var(--silver-blue);
+}
+
+.rank-number {
+    min-width: 36px;
+
+    font-family: Georgia, serif;
+    font-size: 14px;
+
+    color: var(--deep);
+}
+
+.rank-name {
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.tree-section {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    margin-top: 72px;
+}
+
+.tree-heading {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+.tree-kicker {
+    font-family: Georgia, serif;
+    font-size: 8px;
+    letter-spacing: .20em;
+    color: var(--muted);
+}
+
+.tree-heading h2 {
+    margin-top: 6px;
+
+    font-size: 23px;
+    font-weight: 500;
+    letter-spacing: .07em;
+}
+
+.tree-description {
+    margin-top: 8px;
+
+    font-size: 9px;
+    color: var(--muted);
+}
+
+.tree-scroll {
+    width: 100%;
+
+    margin-top: 27px;
+
+    overflow-x: auto;
+
+    padding-bottom: 20px;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.tree {
+    width: max-content;
+    min-width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 14px;
+}
+
+.tree-column {
+    width: 225px;
+
+    flex-shrink: 0;
+
+    padding: 13px;
+
+    background: rgba(235,238,242,.48);
+    border: 1px solid var(--line);
+}
+
+.tree-column-title {
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid var(--line);
+
+    font-family: Georgia, serif;
+    font-size: 10px;
+    letter-spacing: .12em;
+}
+
+.tree-column-title span {
+    display: block;
+
+    margin-top: 4px;
+
+    font-family:
+        "Source Han Serif SC",
+        "Noto Serif SC",
+        serif;
+
+    font-size: 8px;
+
+    opacity: .53;
+}
+
+.tree-match {
+    margin-top: 9px;
+    padding: 7px;
+
+    background: var(--panel-light);
+    border: 1px solid rgba(48,58,71,.10);
+}
+
+.tree-match-label {
+    margin-bottom: 5px;
+
+    font-family: Georgia, serif;
+    font-size: 6px;
+    letter-spacing: .11em;
+
+    color: rgba(48,58,71,.35);
+}
+
+.tree-option {
+    padding: 8px 7px;
+
+    font-size: 8px;
+    line-height: 1.5;
+
+    color: rgba(48,58,71,.50);
+
+    overflow-wrap: anywhere;
+}
+
+.tree-option.winner {
+    background: var(--deep);
+    color: #f3f4f6;
+}
+
+.tree-vs {
+    padding: 2px 0;
+
+    text-align: center;
+
+    font-family: Georgia, serif;
+    font-size: 6px;
+
+    color: rgba(48,58,71,.32);
+}
+
+.bye-box {
+    margin-top: 9px;
+
+    padding: 9px;
+
+    border: 1px dashed var(--silver-blue);
+
+    font-size: 8px;
+    line-height: 1.55;
+}
+
+.bye-box small {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-family: Georgia, serif;
+    letter-spacing: .09em;
+
+    opacity: .48;
+}
+
+.bye-name {
+    margin-top: 5px;
+
+    padding: 7px;
+
+    background: var(--deep);
+
+    color: white;
+}
+
+.result-actions {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    max-width: 330px;
+
+    margin: 50px auto 0;
+
+    text-align: center;
+}
+
+.secondary-button {
+    width: 100%;
+    min-height: 50px;
+
+    margin-top: 10px;
+
+    border: 1px solid var(--deep);
+    background: transparent;
+    color: var(--deep);
+
+    cursor: pointer;
+
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .page {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .page::after {
+        width: 370px;
+        height: 370px;
+    }
+
+    .home-main {
+        padding-top: 32px;
+    }
+
+    .home-title {
+        font-size: clamp(36px,11.8vw,49px);
+    }
+
+    .home-notice,
+    .home-meta {
+        max-width: 340px;
+    }
+
+    .primary-wrap,
+    .rules {
+        max-width: 320px;
+    }
+
+    .round-info {
+        margin-top: 25px;
+    }
+
+    .round-flow {
+        font-size: 27px;
+    }
+
+    .question {
+        margin-top: 22px;
+    }
+
+    .pk-area {
+        max-width: 390px;
+
+        grid-template-columns: 1fr;
+        grid-template-rows:
+            auto
+            48px
+            auto;
+
+        gap: 5px;
+    }
+
+    .choice-card {
+        min-height: 190px;
+        padding: 18px;
+    }
+
+    .choice-text {
+        font-size: clamp(17px,5.4vw,23px);
+    }
+
+    .vs-inner {
+        flex-direction: row;
+    }
+
+    .vs-inner strong {
+        font-size: 16px;
+    }
+
+    .vs-inner span {
+        font-size: 18px;
+    }
+
+    .result-header {
+        margin-top: 34px;
+    }
+
+    .champion-box {
+        margin-top: 34px;
+        padding: 30px 19px;
+    }
+
+    .tree-section {
+        margin-top: 55px;
+    }
+
+    .tree-column {
+        width: 205px;
+    }
+}
+
+@media (max-width: 370px) {
+
+    .emoji-row {
+        gap: 9px;
+    }
+
+    .emoji-row span {
+        font-size: 16px;
+    }
+
+    .home-title {
+        font-size: 34px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HOME PAGE
+========================================================= -->
+
+<section
+    class="page home-page"
+    id="homePage"
+>
+
+    <header class="topbar">
+
+        <div class="top-left">
+
+            <span class="tiny-diamond"></span>
+
+            <span>
+                48 PLAYER TOURNAMENT
+            </span>
+
+        </div>
+
+        <span>
+            RANDOM MODE
+        </span>
+
+    </header>
+
+
+    <div
+        class="floating-emoji"
+        style="
+            left:6%;
+            top:35%;
+            font-size:25px;
+            transform:rotate(-10deg);
+        "
+    >
+        😤
+    </div>
+
+
+    <div
+        class="floating-emoji"
+        style="
+            right:7%;
+            top:38%;
+            font-size:26px;
+            transform:rotate(8deg);
+        "
+    >
+        🌊
+    </div>
+
+
+    <div
+        class="floating-emoji"
+        style="
+            left:13%;
+            bottom:18%;
+            font-size:22px;
+            transform:rotate(-7deg);
+        "
+    >
+        💉
+    </div>
+
+
+    <div
+        class="floating-emoji"
+        style="
+            right:14%;
+            bottom:19%;
+            font-size:23px;
+            transform:rotate(9deg);
+        "
+    >
+        🥊
+    </div>
+
+
+    <main class="home-main">
+
+        <div class="home-id">
+            GAME / 001
+        </div>
+
+        <div class="emoji-row">
+
+            <span>💠</span>
+            <span>🌊</span>
+            <span>😛</span>
+            <span>🥊</span>
+            <span>💉</span>
+            <span>😤</span>
+            <span>😡</span>
+
+        </div>
+
+
+        <div class="home-eyebrow">
+            辱 意 淘 汰 赛
+        </div>
+
+
+        <h1 class="home-title">
+
+            角角落落不辱
+
+            <br>
+
+            怎么追
+
+        </h1>
+
+
+        <div class="title-decoration">
+
+            <span></span>
+
+            <i></i>
+
+            <span></span>
+
+        </div>
+
+
+        <section class="home-notice">
+
+            <div class="notice-title">
+                自备降压药
+            </div>
+
+            <div class="short-line"></div>
+
+            <div class="notice-text">
+
+                作者对文字料真实性不负责
+
+                <br>
+
+                仅供娱乐
+
+            </div>
+
+        </section>
+
+
+        <section class="home-meta">
+
+            <div class="meta-card">
+
+                <small>ITEMS</small>
+
+                <strong>48 项</strong>
+
+            </div>
+
+
+            <div class="meta-card">
+
+                <small>MODE</small>
+
+                <strong>随机 PK</strong>
+
+            </div>
+
+
+            <div class="meta-card">
+
+                <small>GOAL</small>
+
+                <strong>辱意冠军</strong>
+
+            </div>
+
+        </section>
+
+
+        <div class="mode-label">
+
+            <i></i>
+
+            <span>
+                48 强 · 随机匹配 · 单败淘汰
+            </span>
+
+            <i></i>
+
+        </div>
+
+
+        <div class="primary-wrap">
+
+            <button
+                class="primary-button"
+                onclick="startGame()"
+            >
+
+                <span>
+                    开始游戏
+                </span>
+
+                <small>
+                    START
+                </small>
+
+            </button>
+
+        </div>
+
+
+        <details class="rules">
+
+            <summary>
+                游戏规则 ＋
+            </summary>
+
+            <div class="rules-body">
+
+                <p>
+                    48 个选项会在游戏开始时随机排序。
+                </p>
+
+                <p>
+                    每次出现两个选项，请选择更让你辱意大发的一项。
+                </p>
+
+                <p>
+                    被选择的一项继续晋级，另一项淘汰。
+                </p>
+
+                <p>
+                    六强阶段会随机产生两个轮空名额。
+                </p>
+
+                <p>
+                    最终会决出第一名、第二名和第三名。
+                </p>
+
+            </div>
+
+        </details>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <span>
+            48 ITEMS
+        </span>
+
+        <span>
+            选出最让你辱意大发的一项
+        </span>
+
+        <span>
+            2026
+        </span>
+
+    </footer>
+
+</section>
+
+
+
+<!-- =========================================================
+     GAME PAGE
+========================================================= -->
+
+<section
+    class="page game-page hidden"
+    id="gamePage"
+>
+
+    <header class="game-header">
+
+        <div class="game-logo">
+            角角落落不辱怎么追
+        </div>
+
+        <span
+            class="game-round-small"
+            id="topRound"
+        >
+            ROUND 01
+        </span>
+
+    </header>
+
+
+    <section class="round-info">
+
+        <div
+            class="round-name"
+            id="roundName"
+        >
+            48 强
+        </div>
+
+        <div
+            class="round-flow"
+            id="roundFlow"
+        >
+            48 → 24
+        </div>
+
+        <div
+            class="round-counter"
+            id="roundCounter"
+        >
+            1 / 24
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="progress-bar"
+                id="progressBar"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <div class="mood-strip">
+
+        <span>😤</span>
+
+        <span>💠</span>
+
+        <small>
+            当前辱意检测中
+        </small>
+
+        <span>🥊</span>
+
+        <span>💉</span>
+
+    </div>
+
+
+    <div
+        class="bye-note hidden"
+        id="byeNote"
+    >
+        💠 本轮随机产生两个轮空名额
+    </div>
+
+
+    <div class="question">
+
+        哪一项更让你
+
+        <strong>
+            辱意大发
+        </strong>
+
+        ？
+
+    </div>
+
+
+    <main class="pk-area">
+
+
+        <button
+            class="choice-card"
+            id="leftCard"
+            onclick="chooseOption('left')"
+        >
+
+            <div class="choice-label">
+                OPTION A
+            </div>
+
+            <div class="choice-inner-emoji">
+                😛
+            </div>
+
+            <div
+                class="choice-text"
+                id="leftText"
+            ></div>
+
+            <div class="choice-bottom">
+
+                <span>
+                    CHOOSE A
+                </span>
+
+                <span>
+                    😤
+                </span>
+
+            </div>
+
+        </button>
+
+
+        <div class="vs-box">
+
+            <div class="vs-inner">
+
+                <span>
+                    🥊
+                </span>
+
+                <strong>
+                    VS
+                </strong>
+
+                <span>
+                    💥
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="choice-card"
+            id="rightCard"
+            onclick="chooseOption('right')"
+        >
+
+            <div class="choice-label">
+                OPTION B
+            </div>
+
+            <div class="choice-inner-emoji">
+                😡
+            </div>
+
+            <div
+                class="choice-text"
+                id="rightText"
+            ></div>
+
+            <div class="choice-bottom">
+
+                <span>
+                    CHOOSE B
+                </span>
+
+                <span>
+                    🌊
+                </span>
+
+            </div>
+
+        </button>
+
+    </main>
+
+
+    <div class="game-tip">
+
+        💉 选中的选项将继续晋级 · 不要手软 😤
+
+    </div>
+
+
+    <footer class="footer">
+
+        <span>
+            RANDOM MATCH
+        </span>
+
+        <span
+            id="footerRound"
+        >
+            ROUND 01
+        </span>
+
+        <span>
+            💠
+        </span>
+
+    </footer>
+
+</section>
+
+
+
+<!-- =========================================================
+     RESULT PAGE
+========================================================= -->
+
+<section
+    class="page result-page hidden"
+    id="resultPage"
+>
+
+    <header class="topbar">
+
+        <div class="top-left">
+
+            <span class="tiny-diamond"></span>
+
+            <span>
+                FINAL RESULT
+            </span>
+
+        </div>
+
+        <span>
+            48 PLAYER TOURNAMENT
+        </span>
+
+    </header>
+
+
+    <section class="result-header">
+
+        <div class="result-game-name">
+            角角落落不辱怎么追
+        </div>
+
+        <h1 class="result-title">
+            结算结果
+        </h1>
+
+        <div class="result-emojis">
+            💠 🌊 😛 🥊 💉 😤 😡
+        </div>
+
+    </section>
+
+
+    <section class="champion-box">
+
+        <div class="champion-number">
+            NO. 01
+        </div>
+
+        <div class="champion-label">
+            第一名
+        </div>
+
+        <div
+            class="champion-name"
+            id="championName"
+        ></div>
+
+        <div class="champion-note">
+            🥊 本届辱意淘汰赛冠军
+        </div>
+
+    </section>
+
+
+    <section class="top-three">
+
+        <div class="rank-row">
+
+            <span class="rank-number">
+                01
+            </span>
+
+            <span
+                class="rank-name"
+                id="rank1"
+            ></span>
+
+        </div>
+
+
+        <div class="rank-row">
+
+            <span class="rank-number">
+                02
+            </span>
+
+            <span
+                class="rank-name"
+                id="rank2"
+            ></span>
+
+        </div>
+
+
+        <div class="rank-row">
+
+            <span class="rank-number">
+                03
+            </span>
+
+            <span
+                class="rank-name"
+                id="rank3"
+            ></span>
+
+        </div>
+
+    </section>
+
+
+    <section class="tree-section">
+
+        <div class="tree-heading">
+
+            <div class="tree-kicker">
+                YOUR DECISION TREE
+            </div>
+
+            <h2>
+                你的选择全过程
+            </h2>
+
+            <div class="tree-description">
+
+                从左向右查看每一轮 · 深色为你选择的晋级项 · 手机端左右滑动
+
+            </div>
+
+        </div>
+
+
+        <div class="tree-scroll">
+
+            <div
+                class="tree"
+                id="treeContainer"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <section class="result-actions">
+
+        <button
+            class="primary-button"
+            onclick="restartGame()"
+        >
+
+            <span>
+                再玩一次
+            </span>
+
+            <small>
+                REPLAY
+            </small>
+
+        </button>
+
+
+        <button
+            class="secondary-button"
+            onclick="goHome()"
+        >
+            返回首页
+        </button>
+
+    </section>
+
+</section>
+
+
+
+<script>
+
+/* =========================================================
+   48 OPTIONS
+========================================================= */
+
+const ORIGINAL_OPTIONS = [
+
+    "皱如老树",
+
+    "肥如年猪",
+
+    "露营直播搭子眼睛被烟熏不闻不问",
+
+    "831任务用书拍袋鼠十次",
+
+    "过年7天搭子仇人评论",
+
+    "高途vlog背景音和女stf打闹",
+
+    "和赵小姐打闹",
+
+    "单曲py的眷顾",
+
+    "傻傻",
+
+    "直播一板子浪花 可爱的小浪花",
+
+    "背吉他回湖南",
+
+    "大哥你是不是演上瘾了",
+
+    "大哥你能演一下吗",
+
+    "晚安xyp",
+
+    "whoo直播躲腐教程大全",
+
+    "1227弹射皱眉路易十六",
+
+    "唱歌如鸭叫",
+
+    "跳舞如被电",
+
+    "玩手机玩到腱鞘炎",
+
+    "塑料片子和浴巾",
+
+    "生日会切蛋糕捏着刀背也不肯碰到手",
+
+    "不会照顾人",
+
+    "面试+日料（仅文字料不负责真实程度）",
+
+    "鬼船坐腿上",
+
+    "长胖大于二十斤",
+
+    "讨好老板d699",
+
+    "卖团魂D499",
+
+    "直播说搭子牙上有菜",
+
+    "vlog尿流上班如上坟",
+
+    "dzdp打卡按摩",
+
+    "普通话倒欠二级 还一直在退步",
+
+    "直播一直看提词器",
+
+    "跟直播主持人开很亲密/莫名其妙的玩笑",
+
+    "wb双人营业后ins只发单人照片",
+
+    "抽烟熬夜狂喝全糖阿萨姆",
+
+    "熬夜玩手机狂吃含糖水果",
+
+    "不麦麸的单商后稳定更新自嬷擦边照",
+
+    "长得快出栏了拍摄自嬷擦边照",
+
+    "觅觅亲的",
+
+    "jh那狗叫什么",
+
+    "猪妞厕品代卖",
+
+    "机场临时走v nj发视频",
+
+    "男人味冲天仿佛随时要空气投篮",
+
+    "姨味冲天仿佛要捏兰花指当牢星同类",
+
+    "翻牌同一个wf多次",
+
+    "sj粉圈还手滑关注",
+
+    "车墩小红书没发双人图",
+
+    "蹭狼兔"
+
+];
+
+
+/* =========================================================
+   STAGES
+========================================================= */
+
+const STAGES = {
+
+    round48: {
+        title: "ROUND 01",
+        name: "48 强",
+        flow: "48 → 24"
+    },
+
+    round24: {
+        title: "ROUND 02",
+        name: "24 强",
+        flow: "24 → 12"
+    },
+
+    round12: {
+        title: "ROUND 03",
+        name: "12 强",
+        flow: "12 → 6"
+    },
+
+    round6: {
+        title: "ROUND 04",
+        name: "六强晋级",
+        flow: "6 → 4"
+    },
+
+    semifinal: {
+        title: "SEMIFINAL",
+        name: "半决赛",
+        flow: "4 → 2"
+    },
+
+    final: {
+        title: "FINAL",
+        name: "冠军赛",
+        flow: "2 → 1"
+    },
+
+    bronze: {
+        title: "THIRD PLACE",
+        name: "季军赛",
+        flow: "3RD"
+    }
+
+};
+
+
+/* =========================================================
+   GAME STATE
+========================================================= */
+
+let game = null;
+
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+function shuffle(array) {
+
+    const arr = [...array];
+
+    for (
+        let i = arr.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [
+            arr[i],
+            arr[j]
+        ] = [
+            arr[j],
+            arr[i]
+        ];
+
+    }
+
+    return arr;
+}
+
+
+function showPage(pageId) {
+
+    document
+        .getElementById("homePage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("gamePage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("resultPage")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById(pageId)
+        .classList.remove("hidden");
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "instant"
+    });
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+function startGame() {
+
+    game = {
+
+        stage: null,
+
+        matchPool: [],
+
+        matchIndex: 0,
+
+        winners: [],
+
+        byes: [],
+
+        history: [],
+
+        byesHistory: {},
+
+        semifinalLosers: [],
+
+        champion: null,
+
+        runnerUp: null,
+
+        thirdPlace: null
+
+    };
+
+
+    const players =
+        shuffle(ORIGINAL_OPTIONS);
+
+
+    prepareStage(
+        "round48",
+        players
+    );
+
+
+    showPage(
+        "gamePage"
+    );
+
+
+    renderMatch();
+
+}
+
+
+/* =========================================================
+   PREPARE ROUND
+========================================================= */
+
+function prepareStage(
+    stage,
+    players
+) {
+
+    const shuffledPlayers =
+        shuffle(players);
+
+
+    game.stage =
+        stage;
+
+
+    game.matchIndex =
+        0;
+
+
+    game.winners =
+        [];
+
+
+    game.byes =
+        [];
+
+
+    if (
+        stage === "round6"
+    ) {
+
+        game.byes =
+            shuffledPlayers.slice(0, 2);
+
+
+        game.matchPool =
+            shuffledPlayers.slice(2);
+
+
+        game.winners =
+            [...game.byes];
+
+
+        game.byesHistory[
+            stage
+        ] = [
+            ...game.byes
+        ];
+
+    }
+
+    else {
+
+        game.matchPool =
+            shuffledPlayers;
+
+    }
+
+}
+
+
+/* =========================================================
+   CURRENT PAIR
+========================================================= */
+
+function getCurrentPair() {
+
+    const i =
+        game.matchIndex * 2;
+
+
+    if (
+        i + 1
+        >=
+        game.matchPool.length
+    ) {
+
+        return null;
+
+    }
+
+
+    return [
+
+        game.matchPool[i],
+
+        game.matchPool[i + 1]
+
+    ];
+
+}
+
+
+/* =========================================================
+   RENDER MATCH
+========================================================= */
+
+function renderMatch() {
+
+    const pair =
+        getCurrentPair();
+
+
+    if (!pair) {
+
+        return;
+
+    }
+
+
+    const meta =
+        STAGES[game.stage];
+
+
+    const totalMatches =
+        game.matchPool.length / 2;
+
+
+    const current =
+        game.matchIndex + 1;
+
+
+    document
+        .getElementById("topRound")
+        .textContent =
+        meta.title;
+
+
+    document
+        .getElementById("footerRound")
+        .textContent =
+        meta.title;
+
+
+    document
+        .getElementById("roundName")
+        .textContent =
+        meta.name;
+
+
+    document
+        .getElementById("roundFlow")
+        .textContent =
+        meta.flow;
+
+
+    document
+        .getElementById("roundCounter")
+        .textContent =
+        `${current} / ${totalMatches}`;
+
+
+    document
+        .getElementById("progressBar")
+        .style.width =
+        `${current / totalMatches * 100}%`;
+
+
+    document
+        .getElementById("leftText")
+        .textContent =
+        pair[0];
+
+
+    document
+        .getElementById("rightText")
+        .textContent =
+        pair[1];
+
+
+    const byeNote =
+        document.getElementById(
+            "byeNote"
+        );
+
+
+    if (
+        game.stage === "round6"
+        &&
+        game.byes.length > 0
+    ) {
+
+        byeNote
+            .classList
+            .remove("hidden");
+
+    }
+
+    else {
+
+        byeNote
+            .classList
+            .add("hidden");
+
+    }
+
+}
+
+
+/* =========================================================
+   CHOOSE
+========================================================= */
+
+function chooseOption(side) {
+
+    const pair =
+        getCurrentPair();
+
+
+    if (!pair) {
+        return;
+    }
+
+
+    const [
+        left,
+        right
+    ] = pair;
+
+
+    let winner;
+    let loser;
+
+
+    if (
+        side === "left"
+    ) {
+
+        winner =
+            left;
+
+        loser =
+            right;
+
+    }
+
+    else {
+
+        winner =
+            right;
+
+        loser =
+            left;
+
+    }
+
+
+    game.history.push({
+
+        stage:
+            game.stage,
+
+        left:
+            left,
+
+        right:
+            right,
+
+        winner:
+            winner,
+
+        loser:
+            loser
+
+    });
+
+
+    if (
+        game.stage
+        ===
+        "semifinal"
+    ) {
+
+        game
+            .semifinalLosers
+            .push(loser);
+
+    }
+
+
+    if (
+        game.stage
+        ===
+        "final"
+    ) {
+
+        game.champion =
+            winner;
+
+        game.runnerUp =
+            loser;
+
+    }
+
+
+    if (
+        game.stage
+        ===
+        "bronze"
+    ) {
+
+        game.thirdPlace =
+            winner;
+
+    }
+
+
+    game.winners.push(
+        winner
+    );
+
+
+    game.matchIndex += 1;
+
+
+    const totalMatches =
+        game.matchPool.length / 2;
+
+
+    if (
+        game.matchIndex
+        >=
+        totalMatches
+    ) {
+
+        advanceStage();
+
+    }
+
+
+    else {
+
+        renderMatch();
+
+    }
+
+}
+
+
+/* =========================================================
+   ADVANCE
+========================================================= */
+
+function advanceStage() {
+
+    const stage =
+        game.stage;
+
+
+    const winners =
+        [...game.winners];
+
+
+    if (
+        stage === "round48"
+    ) {
+
+        prepareStage(
+            "round24",
+            winners
+        );
+
+        renderMatch();
+
+    }
+
+
+    else if (
+        stage === "round24"
+    ) {
+
+        prepareStage(
+            "round12",
+            winners
+        );
+
+        renderMatch();
+
+    }
+
+
+    else if (
+        stage === "round12"
+    ) {
+
+        prepareStage(
+            "round6",
+            winners
+        );
+
+        renderMatch();
+
+    }
+
+
+    else if (
+        stage === "round6"
+    ) {
+
+        prepareStage(
+            "semifinal",
+            winners
+        );
+
+        renderMatch();
+
+    }
+
+
+    else if (
+        stage === "semifinal"
+    ) {
+
+        prepareStage(
+            "final",
+            winners
+        );
+
+        renderMatch();
+
+    }
+
+
+    else if (
+        stage === "final"
+    ) {
+
+        prepareStage(
+            "bronze",
+            game.semifinalLosers
+        );
+
+        renderMatch();
+
+    }
+
+
+    else if (
+        stage === "bronze"
+    ) {
+
+        showResult();
+
+    }
+
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+function showResult() {
+
+    document
+        .getElementById(
+            "championName"
+        )
+        .textContent =
+        game.champion;
+
+
+    document
+        .getElementById(
+            "rank1"
+        )
+        .textContent =
+        game.champion;
+
+
+    document
+        .getElementById(
+            "rank2"
+        )
+        .textContent =
+        game.runnerUp;
+
+
+    document
+        .getElementById(
+            "rank3"
+        )
+        .textContent =
+        game.thirdPlace;
+
+
+    renderTree();
+
+
+    showPage(
+        "resultPage"
+    );
+
+}
+
+
+/* =========================================================
+   DECISION TREE
+========================================================= */
+
+function renderTree() {
+
+    const tree =
+        document.getElementById(
+            "treeContainer"
+        );
+
+
+    tree.innerHTML = "";
+
+
+    const stageOrder = [
+
+        "round48",
+
+        "round24",
+
+        "round12",
+
+        "round6",
+
+        "semifinal",
+
+        "final",
+
+        "bronze"
+
+    ];
+
+
+    stageOrder.forEach(
+        stage => {
+
+            const matches =
+                game.history.filter(
+                    item =>
+                        item.stage === stage
+                );
+
+
+            const byes =
+                game.byesHistory[
+                    stage
+                ] || [];
+
+
+            if (
+                matches.length === 0
+                &&
+                byes.length === 0
+            ) {
+
+                return;
+
+            }
+
+
+            const column =
+                document.createElement(
+                    "section"
+                );
+
+
+            column.className =
+                "tree-column";
+
+
+            const title =
+                document.createElement(
+                    "div"
+                );
+
+
+            title.className =
+                "tree-column-title";
+
+
+            title.innerHTML = `
+                ${STAGES[stage].title}
+                <span>
+                    ${STAGES[stage].name}
+                </span>
+            `;
+
+
+            column.appendChild(
+                title
+            );
+
+
+            if (
+                byes.length
+                >
+                0
+            ) {
+
+                const byeBox =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                byeBox.className =
+                    "bye-box";
+
+
+                byeBox.innerHTML =
+                    `<small>RANDOM BYE</small>`;
+
+
+                byes.forEach(
+                    bye => {
+
+                        const item =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        item.className =
+                            "bye-name";
+
+
+                        item.textContent =
+                            bye;
+
+
+                        byeBox.appendChild(
+                            item
+                        );
+
+                    }
+                );
+
+
+                column.appendChild(
+                    byeBox
+                );
+
+            }
+
+
+            matches.forEach(
+                (
+                    match,
+                    index
+                ) => {
+
+                    const box =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    box.className =
+                        "tree-match";
+
+
+                    box.innerHTML = `
+
+                        <div class="tree-match-label">
+                            MATCH ${index + 1}
+                        </div>
+
+                        <div class="
+                            tree-option
+                            ${
+                                match.left
+                                ===
+                                match.winner
+                                ?
+                                "winner"
+                                :
+                                ""
+                            }
+                        ">
+                            ${escapeHTML(match.left)}
+                        </div>
+
+                        <div class="tree-vs">
+                            VS
+                        </div>
+
+                        <div class="
+                            tree-option
+                            ${
+                                match.right
+                                ===
+                                match.winner
+                                ?
+                                "winner"
+                                :
+                                ""
+                            }
+                        ">
+                            ${escapeHTML(match.right)}
+                        </div>
+                    `;
+
+
+                    column.appendChild(
+                        box
+                    );
+
+                }
+            );
+
+
+            tree.appendChild(
+                column
+            );
+
+        }
+    );
+
+
+    const championColumn =
+        document.createElement(
+            "section"
+        );
+
+
+    championColumn.className =
+        "tree-column";
+
+
+    championColumn.innerHTML = `
+
+        <div class="tree-column-title">
+            WINNER
+            <span>
+                最终冠军
+            </span>
+        </div>
+
+        <div class="tree-match">
+
+            <div class="tree-match-label">
+                CHAMPION
+            </div>
+
+            <div class="tree-option winner">
+                ${escapeHTML(game.champion)}
+            </div>
+
+        </div>
+    `;
+
+
+    tree.appendChild(
+        championColumn
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function escapeHTML(text) {
+
+    return text
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   RESTART / HOME
+========================================================= */
+
+function restartGame() {
+
+    startGame();
+
+}
+
+
+function goHome() {
+
+    game = null;
+
+    showPage(
+        "homePage"
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
