@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>{{ meta.title }}</title>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600&display=swap"
+    rel="stylesheet"
+>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+>
+
+</head>
+
+
+<body>
+
+
+<div class="page game-page">
+
+
+    <header class="game-header">
+
+
+        <a
+            href="{{ url_for('index') }}"
+            class="game-logo"
+        >
+
+            角角落落不辱怎么追
+
+        </a>
+
+
+        <span class="game-round-small">
+
+            {{ meta.title }}
+
+        </span>
+
+
+    </header>
+
+
+
+    <section class="round-info">
+
+
+        <div class="round-name">
+
+            {{ meta.name }}
+
+        </div>
+
+
+        <div class="round-flow">
+
+            {{ meta.flow }}
+
+        </div>
+
+
+        <div class="round-counter">
+
+            {{ current_match }}
+            /
+            {{ total_matches }}
+
+        </div>
+
+
+        <div class="progress">
+
+            <div
+                class="progress-bar"
+                style="width: {{ progress }}%;"
+            ></div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <div class="mood-strip">
+
+        <span>😤</span>
+
+        <span>💠</span>
+
+        <small>
+            当前辱意检测中
+        </small>
+
+        <span>🥊</span>
+
+        <span>💉</span>
+
+    </div>
+
+
+
+    {% if byes %}
+
+    <div class="bye-note">
+
+        💠 本轮随机产生两个轮空名额
+
+    </div>
+
+    {% endif %}
+
+
+
+    <div class="question">
+
+        哪一项更让你
+
+        <strong>
+            辱意大发
+        </strong>
+
+        ？
+
+    </div>
+
+
+
+    <main class="pk-area">
+
+
+        <!-- OPTION A -->
+
+        <form
+            action="{{ url_for('choose') }}"
+            method="POST"
+            class="choice-form"
+        >
+
+            <button
+                type="submit"
+                name="choice"
+                value="left"
+                class="choice-card"
+            >
+
+
+                <div class="choice-label">
+
+                    OPTION A
+
+                </div>
+
+
+                <div class="choice-inner-emoji">
+
+                    😛
+
+                </div>
+
+
+                <div class="choice-text">
+
+                    {{ left }}
+
+                </div>
+
+
+                <div class="choice-bottom">
+
+                    <span>
+                        CHOOSE A
+                    </span>
+
+                    <span>
+                        😤
+                    </span>
+
+                </div>
+
+
+            </button>
+
+        </form>
+
+
+
+        <!-- VS -->
+
+        <div class="vs-box">
+
+
+            <div class="vs-inner">
+
+                <span>
+                    🥊
+                </span>
+
+                <strong>
+                    VS
+                </strong>
+
+                <span>
+                    💥
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- OPTION B -->
+
+        <form
+            action="{{ url_for('choose') }}"
+            method="POST"
+            class="choice-form"
+        >
+
+            <button
+                type="submit"
+                name="choice"
+                value="right"
+                class="choice-card"
+            >
+
+
+                <div class="choice-label">
+
+                    OPTION B
+
+                </div>
+
+
+                <div class="choice-inner-emoji">
+
+                    😡
+
+                </div>
+
+
+                <div class="choice-text">
+
+                    {{ right }}
+
+                </div>
+
+
+                <div class="choice-bottom">
+
+                    <span>
+                        CHOOSE B
+                    </span>
+
+                    <span>
+                        🌊
+                    </span>
+
+                </div>
+
+
+            </button>
+
+        </form>
+
+
+    </main>
+
+
+
+    <div class="game-tip">
+
+        💉 选中的选项将继续晋级 · 不要手软 😤
+
+    </div>
+
+
+
+    <footer class="footer">
+
+        <span>
+            RANDOM MATCH
+        </span>
+
+        <span>
+            {{ meta.title }}
+        </span>
+
+        <span>
+            💠
+        </span>
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>

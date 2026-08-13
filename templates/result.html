@@ -1,0 +1,2282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>结算结果</title>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600&display=swap"
+    rel="stylesheet"
+>
+
+
+<style>
+
+/* =====================================================
+   1. COLOR SYSTEM
+===================================================== */
+
+:root {
+
+    --bg: #d9dde3;
+
+    --panel: #e6e9ed;
+
+    --panel-light: #edf0f3;
+
+    --panel-dark: #cbd1d8;
+
+    --silver-blue: #8291a3;
+
+    --silver-blue-light: #a5b0bd;
+
+    --deep: #465568;
+
+    --deep-2: #354252;
+
+    --text: #303a47;
+
+    --muted: rgba(48, 58, 71, .53);
+
+    --line: rgba(48, 58, 71, .17);
+
+    --line-strong: rgba(48, 58, 71, .31);
+
+}
+
+
+/* =====================================================
+   2. RESET
+===================================================== */
+
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+}
+
+
+html,
+body {
+
+    width: 100%;
+
+    min-height: 100%;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background:
+        var(--bg);
+
+    color:
+        var(--text);
+
+
+    font-family:
+
+        "Source Han Serif SC",
+
+        "Noto Serif SC",
+
+        "Songti SC",
+
+        serif;
+
+}
+
+
+/* =====================================================
+   3. PAGE
+===================================================== */
+
+.page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+
+    padding:
+
+        max(
+            20px,
+            env(safe-area-inset-top)
+        )
+
+        18px
+
+        60px;
+
+}
+
+
+/* =====================================================
+   4. TOP
+===================================================== */
+
+.top {
+
+    width: 100%;
+
+    max-width: 1150px;
+
+
+    margin: 0 auto;
+
+
+    padding-bottom: 13px;
+
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+
+    font-size: 8px;
+
+    letter-spacing: .13em;
+
+
+    color:
+        var(--muted);
+
+}
+
+
+.top-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+}
+
+
+.top-diamond {
+
+    width: 6px;
+
+    height: 6px;
+
+
+    background:
+        var(--silver-blue);
+
+
+    transform:
+        rotate(45deg);
+
+}
+
+
+/* =====================================================
+   5. RESULT HEADER
+===================================================== */
+
+.result-header {
+
+    width: 100%;
+
+    max-width: 760px;
+
+
+    margin:
+
+        43px auto 0;
+
+
+    text-align: center;
+
+}
+
+
+.result-game-name {
+
+    font-size: 9px;
+
+    letter-spacing: .14em;
+
+
+    color:
+        var(--muted);
+
+}
+
+
+.result-header h1 {
+
+    margin-top: 16px;
+
+
+    font-size:
+
+        clamp(
+            42px,
+            9vw,
+            70px
+        );
+
+
+    line-height: 1.25;
+
+
+    font-weight: 500;
+
+
+    letter-spacing: .06em;
+
+
+    color:
+        var(--deep);
+
+}
+
+
+.result-emojis {
+
+    margin-top: 17px;
+
+
+    font-family:
+
+        Apple Color Emoji,
+
+        Segoe UI Emoji,
+
+        sans-serif;
+
+
+    font-size: 18px;
+
+    letter-spacing: .14em;
+
+}
+
+
+/* =====================================================
+   6. CHAMPION
+===================================================== */
+
+.champion {
+
+    position: relative;
+
+
+    width: 100%;
+
+    max-width: 650px;
+
+
+    margin:
+
+        42px auto 0;
+
+
+    padding:
+
+        37px 27px;
+
+
+    text-align: center;
+
+
+    background:
+        var(--panel);
+
+
+    border:
+
+        1px solid
+        var(--line-strong);
+
+}
+
+
+.champion::before {
+
+    content: "";
+
+    position: absolute;
+
+
+    left: -1px;
+
+    top: -1px;
+
+
+    width: 23px;
+
+    height: 23px;
+
+
+    border-left:
+        2px solid
+        var(--deep);
+
+
+    border-top:
+        2px solid
+        var(--deep);
+
+}
+
+
+.champion::after {
+
+    content: "";
+
+    position: absolute;
+
+
+    right: -1px;
+
+    bottom: -1px;
+
+
+    width: 23px;
+
+    height: 23px;
+
+
+    border-right:
+        2px solid
+        var(--deep);
+
+
+    border-bottom:
+        2px solid
+        var(--deep);
+
+}
+
+
+.champion-number {
+
+    font-family:
+        Georgia,
+        serif;
+
+
+    font-size: 8px;
+
+    letter-spacing: .27em;
+
+
+    color:
+        var(--muted);
+
+}
+
+
+.champion-label {
+
+    margin-top: 12px;
+
+
+    font-size: 14px;
+
+    letter-spacing: .30em;
+
+    margin-left: .30em;
+
+
+    color:
+        var(--silver-blue);
+
+}
+
+
+.champion-name {
+
+    margin-top: 25px;
+
+
+    font-size:
+
+        clamp(
+            23px,
+            6vw,
+            39px
+        );
+
+
+    line-height: 1.55;
+
+
+    font-weight: 500;
+
+
+    color:
+        var(--deep-2);
+
+}
+
+
+.champion-note {
+
+    margin-top: 23px;
+
+
+    font-size: 8px;
+
+    letter-spacing: .08em;
+
+
+    color:
+        var(--muted);
+
+}
+
+
+/* =====================================================
+   7. TOP THREE
+===================================================== */
+
+.top-three {
+
+    width: 100%;
+
+    max-width: 650px;
+
+
+    margin:
+
+        12px auto 0;
+
+
+    display: flex;
+
+    flex-direction: column;
+
+
+    gap: 7px;
+
+}
+
+
+.rank-row {
+
+    min-height: 64px;
+
+
+    padding:
+
+        13px 17px;
+
+
+    background:
+        rgba(238, 240, 243, .52);
+
+
+    border:
+
+        1px solid
+        var(--line);
+
+
+    display: flex;
+
+    align-items: center;
+
+
+    gap: 16px;
+
+}
+
+
+.rank-row:first-child {
+
+    border-color:
+        var(--silver-blue);
+
+}
+
+
+.rank-number {
+
+    min-width: 36px;
+
+
+    font-family:
+        Georgia,
+        serif;
+
+
+    font-size: 14px;
+
+
+    color:
+        var(--deep);
+
+}
+
+
+.rank-name {
+
+    font-size: 12px;
+
+    line-height: 1.55;
+
+}
+
+
+/* =====================================================
+   8. TREE SECTION
+===================================================== */
+
+.tree-section {
+
+    width: 100%;
+
+
+    margin-top: 72px;
+
+}
+
+
+.tree-heading {
+
+    width: 100%;
+
+    max-width: 1150px;
+
+
+    margin: 0 auto;
+
+}
+
+
+.tree-kicker {
+
+    font-family:
+        Georgia,
+        serif;
+
+
+    font-size: 8px;
+
+    letter-spacing: .20em;
+
+
+    color:
+        var(--muted);
+
+}
+
+
+.tree-heading h2 {
+
+    margin-top: 6px;
+
+
+    font-size: 23px;
+
+    font-weight: 500;
+
+
+    letter-spacing: .07em;
+
+}
+
+
+.tree-description {
+
+    margin-top: 8px;
+
+
+    font-size: 9px;
+
+
+    color:
+        var(--muted);
+
+}
+
+
+/* =====================================================
+   9. SCROLL AREA
+===================================================== */
+
+.tree-scroll {
+
+    position: relative;
+
+
+    width: 100%;
+
+
+    margin-top: 27px;
+
+
+    overflow-x: auto;
+
+    overflow-y: visible;
+
+
+    padding:
+
+        5px 0
+        25px;
+
+
+    -webkit-overflow-scrolling:
+        touch;
+
+
+    scrollbar-width:
+        thin;
+
+
+    scrollbar-color:
+
+        var(--silver-blue-light)
+
+        transparent;
+
+}
+
+
+.tree-scroll::-webkit-scrollbar {
+
+    height: 5px;
+
+}
+
+
+.tree-scroll::-webkit-scrollbar-track {
+
+    background:
+        transparent;
+
+}
+
+
+.tree-scroll::-webkit-scrollbar-thumb {
+
+    background:
+        var(--silver-blue-light);
+
+}
+
+
+/* =====================================================
+   10. TREE CANVAS
+===================================================== */
+
+.tree-canvas {
+
+    position: relative;
+
+
+    display: inline-flex;
+
+
+    align-items: flex-start;
+
+
+    gap: 78px;
+
+
+    width: max-content;
+
+
+    min-width: 100%;
+
+
+    padding:
+
+        0 40px
+        20px;
+
+}
+
+
+/*
+SVG 连接线覆盖整棵树
+*/
+
+.tree-lines {
+
+    position: absolute;
+
+
+    inset: 0;
+
+
+    width: 100%;
+
+    height: 100%;
+
+
+    pointer-events: none;
+
+
+    z-index: 0;
+
+}
+
+
+/* =====================================================
+   11. ROUND COLUMN
+===================================================== */
+
+.round-column {
+
+    position: relative;
+
+
+    z-index: 2;
+
+
+    width: 240px;
+
+
+    flex-shrink: 0;
+
+}
+
+
+.round-header {
+
+    min-height: 57px;
+
+
+    padding-bottom: 13px;
+
+
+    border-bottom:
+
+        1px solid
+        var(--line-strong);
+
+}
+
+
+.round-index {
+
+    font-family:
+        Georgia,
+        serif;
+
+
+    font-size: 10px;
+
+    letter-spacing: .14em;
+
+
+    color:
+        var(--deep);
+
+}
+
+
+.round-name {
+
+    margin-top: 5px;
+
+
+    font-size: 9px;
+
+    letter-spacing: .08em;
+
+
+    color:
+        var(--muted);
+
+}
+
+
+.round-matches {
+
+    display: flex;
+
+    flex-direction: column;
+
+
+    gap: 14px;
+
+
+    margin-top: 16px;
+
+}
+
+
+/* =====================================================
+   12. MATCH CARD
+===================================================== */
+
+.match-card {
+
+    position: relative;
+
+
+    width: 100%;
+
+
+    min-height: 92px;
+
+
+    padding: 7px;
+
+
+    background:
+        rgba(237, 240, 243, .62);
+
+
+    border:
+
+        1px solid
+        var(--line);
+
+
+    transition:
+        border .15s ease;
+
+}
+
+
+.match-card:hover {
+
+    border-color:
+        var(--silver-blue);
+
+}
+
+
+.match-label {
+
+    margin-bottom: 5px;
+
+
+    padding-left: 3px;
+
+
+    font-family:
+        Georgia,
+        serif;
+
+
+    font-size: 6px;
+
+    letter-spacing: .13em;
+
+
+    color:
+        rgba(48, 58, 71, .37);
+
+}
+
+
+/* 两个选项 */
+
+.tree-option {
+
+    min-height: 31px;
+
+
+    padding:
+
+        7px 7px;
+
+
+    display: flex;
+
+    align-items: center;
+
+
+    font-size: 8px;
+
+    line-height: 1.45;
+
+
+    color:
+        rgba(48, 58, 71, .47);
+
+
+    overflow-wrap: anywhere;
+
+}
+
+
+/* 晋级项 */
+
+.tree-option.winner {
+
+    background:
+        var(--deep);
+
+
+    color:
+        #f3f5f7;
+
+}
+
+
+/* 中间线 */
+
+.option-divider {
+
+    height: 1px;
+
+
+    margin:
+        2px 5px;
+
+
+    background:
+        var(--line);
+
+}
+
+
+/* =====================================================
+   13. BYE
+===================================================== */
+
+.bye-card {
+
+    position: relative;
+
+
+    min-height: 78px;
+
+
+    padding:
+
+        11px;
+
+
+    border:
+
+        1px dashed
+        var(--silver-blue);
+
+
+    background:
+        rgba(237, 240, 243, .40);
+
+}
+
+
+.bye-label {
+
+    font-family:
+        Georgia,
+        serif;
+
+
+    font-size: 7px;
+
+    letter-spacing: .13em;
+
+
+    color:
+        var(--muted);
+
+}
+
+
+.bye-name {
+
+    margin-top: 7px;
+
+
+    padding:
+
+        7px;
+
+
+    background:
+        var(--deep);
+
+
+    color:
+        white;
+
+
+    font-size: 8px;
+
+    line-height: 1.45;
+
+}
+
+
+/* =====================================================
+   14. FINAL COLUMN
+===================================================== */
+
+.final-column {
+
+    width: 250px;
+
+}
+
+
+.winner-node {
+
+    margin-top: 36px;
+
+
+    padding:
+
+        27px 16px;
+
+
+    text-align: center;
+
+
+    border:
+
+        1px solid
+        var(--deep);
+
+
+    background:
+        var(--panel);
+
+}
+
+
+.winner-node-label {
+
+    font-family:
+        Georgia,
+        serif;
+
+
+    font-size: 7px;
+
+    letter-spacing: .16em;
+
+
+    color:
+        var(--muted);
+
+}
+
+
+.winner-node-name {
+
+    margin-top: 13px;
+
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+
+    font-weight: 500;
+
+
+    color:
+        var(--deep);
+
+}
+
+
+.winner-node-icon {
+
+    margin-top: 13px;
+
+
+    font-size: 19px;
+
+}
+
+
+/* =====================================================
+   15. BRONZE
+===================================================== */
+
+.bronze-section {
+
+    width: 100%;
+
+    max-width: 650px;
+
+
+    margin:
+
+        45px auto 0;
+
+
+    padding-top: 25px;
+
+
+    border-top:
+
+        1px solid
+        var(--line);
+
+}
+
+
+.bronze-title {
+
+    font-family:
+        Georgia,
+        serif;
+
+
+    font-size: 8px;
+
+    letter-spacing: .18em;
+
+
+    color:
+        var(--muted);
+
+}
+
+
+.bronze-result {
+
+    margin-top: 10px;
+
+
+    font-size: 11px;
+
+}
+
+
+/* =====================================================
+   16. ACTION
+===================================================== */
+
+.actions {
+
+    width: 100%;
+
+    max-width: 330px;
+
+
+    margin:
+
+        55px auto 0;
+
+
+    text-align: center;
+
+}
+
+
+.actions form {
+
+    width: 100%;
+
+}
+
+
+.replay {
+
+    width: 100%;
+
+    min-height: 58px;
+
+
+    background:
+        var(--deep);
+
+
+    border:
+
+        1px solid
+        var(--deep);
+
+
+    color:
+        white;
+
+
+    font-family: inherit;
+
+
+    cursor: pointer;
+
+
+    transition:
+        .15s ease;
+
+}
+
+
+.replay:hover {
+
+    background:
+        #59687a;
+
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.replay span {
+
+    display: block;
+
+
+    font-size: 15px;
+
+    letter-spacing: .22em;
+
+    margin-left: .22em;
+
+}
+
+
+.replay small {
+
+    display: block;
+
+
+    margin-top: 3px;
+
+
+    font-family:
+        Georgia,
+        serif;
+
+
+    font-size: 7px;
+
+    letter-spacing: .34em;
+
+
+    opacity: .50;
+
+}
+
+
+.home {
+
+    display: inline-block;
+
+
+    margin-top: 17px;
+
+
+    color:
+        var(--muted);
+
+
+    text-decoration: none;
+
+
+    font-size: 9px;
+
+    letter-spacing: .10em;
+
+}
+
+
+/* =====================================================
+   17. MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .page {
+
+        padding-left: 16px;
+
+        padding-right: 16px;
+
+    }
+
+
+    .result-header {
+
+        margin-top: 33px;
+
+    }
+
+
+    .champion {
+
+        margin-top: 34px;
+
+
+        padding:
+
+            30px 19px;
+
+    }
+
+
+    .tree-section {
+
+        margin-top: 55px;
+
+    }
+
+
+    .tree-canvas {
+
+        gap: 60px;
+
+
+        padding-left: 15px;
+
+        padding-right: 40px;
+
+    }
+
+
+    .round-column {
+
+        width: 205px;
+
+    }
+
+
+    .final-column {
+
+        width: 215px;
+
+    }
+
+
+    .tree-description::after {
+
+        content:
+            " →";
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<!-- =====================================================
+     TOP
+===================================================== -->
+
+<header class="top">
+
+    <div class="top-left">
+
+        <span class="top-diamond"></span>
+
+        <span>
+            FINAL RESULT
+        </span>
+
+    </div>
+
+
+    <span>
+        48 PLAYER TOURNAMENT
+    </span>
+
+</header>
+
+
+
+<!-- =====================================================
+     RESULT HEADER
+===================================================== -->
+
+<section class="result-header">
+
+
+    <div class="result-game-name">
+
+        角角落落不辱怎么追
+
+    </div>
+
+
+    <h1>
+
+        结算结果
+
+    </h1>
+
+
+    <div class="result-emojis">
+
+        💠 🌊 😛 🥊 💉 😤 😡
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CHAMPION
+===================================================== -->
+
+<section class="champion">
+
+
+    <div class="champion-number">
+
+        NO. 01
+
+    </div>
+
+
+    <div class="champion-label">
+
+        第一名
+
+    </div>
+
+
+    <div class="champion-name">
+
+        {{ champion }}
+
+    </div>
+
+
+    <div class="champion-note">
+
+        🥊 本届辱意淘汰赛冠军
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     TOP THREE
+===================================================== -->
+
+<section class="top-three">
+
+
+    <div class="rank-row">
+
+        <span class="rank-number">
+            01
+        </span>
+
+        <span class="rank-name">
+            {{ champion }}
+        </span>
+
+    </div>
+
+
+    <div class="rank-row">
+
+        <span class="rank-number">
+            02
+        </span>
+
+        <span class="rank-name">
+            {{ runner_up }}
+        </span>
+
+    </div>
+
+
+    <div class="rank-row">
+
+        <span class="rank-number">
+            03
+        </span>
+
+        <span class="rank-name">
+            {{ third_place }}
+        </span>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     FULL DECISION TREE
+===================================================== -->
+
+<section class="tree-section">
+
+
+    <div class="tree-heading">
+
+
+        <div class="tree-kicker">
+
+            YOUR DECISION TREE
+
+        </div>
+
+
+        <h2>
+
+            你的选择全过程
+
+        </h2>
+
+
+        <div class="tree-description">
+
+            从左向右查看每一轮晋级路径 · 深色为你的选择 · 手机端左右滑动
+
+        </div>
+
+
+    </div>
+
+
+
+    <div
+        class="tree-scroll"
+        id="treeScroll"
+    >
+
+
+        <div
+            class="tree-canvas"
+            id="treeCanvas"
+        >
+
+
+            <!-- SVG 连接线 -->
+
+            <svg
+                class="tree-lines"
+                id="treeLines"
+            ></svg>
+
+
+
+            <!-- =================================================
+                 每一轮
+            ================================================== -->
+
+
+            {% for group in groups %}
+
+
+                {% if group.stage != "bronze" %}
+
+
+                <section
+                    class="round-column"
+                    data-stage="{{ group.stage }}"
+                >
+
+
+                    <div class="round-header">
+
+
+                        <div class="round-index">
+
+                            {{ group.meta.title }}
+
+                        </div>
+
+
+                        <div class="round-name">
+
+                            {{ group.meta.name }}
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="round-matches">
+
+
+                        <!-- =====================================
+                             六强轮空
+                        ====================================== -->
+
+
+                        {% if group.byes %}
+
+
+                            {% for bye in group.byes %}
+
+
+                            <div
+                                class="bye-card advance-node"
+                                data-advance="{{ bye }}"
+                            >
+
+
+                                <div class="bye-label">
+
+                                    RANDOM BYE
+
+                                </div>
+
+
+                                <div class="bye-name">
+
+                                    {{ bye }}
+
+                                </div>
+
+
+                            </div>
+
+
+                            {% endfor %}
+
+
+                        {% endif %}
+
+
+
+                        <!-- =====================================
+                             正常 PK
+                        ====================================== -->
+
+
+                        {% for match in group.matches %}
+
+
+                        <div
+                            class="match-card advance-node"
+                            data-advance="{{ match.winner }}"
+                            data-left="{{ match.left }}"
+                            data-right="{{ match.right }}"
+                        >
+
+
+                            <div class="match-label">
+
+                                MATCH {{ loop.index|string }}
+
+                            </div>
+
+
+
+                            <div
+                                class="
+                                    tree-option
+
+                                    {% if match.left == match.winner %}
+                                        winner
+                                    {% endif %}
+                                "
+                            >
+
+                                {{ match.left }}
+
+                            </div>
+
+
+                            <div class="option-divider"></div>
+
+
+                            <div
+                                class="
+                                    tree-option
+
+                                    {% if match.right == match.winner %}
+                                        winner
+                                    {% endif %}
+                                "
+                            >
+
+                                {{ match.right }}
+
+                            </div>
+
+
+                        </div>
+
+
+                        {% endfor %}
+
+
+                    </div>
+
+
+                </section>
+
+
+                {% endif %}
+
+
+            {% endfor %}
+
+
+
+            <!-- =================================================
+                 最终冠军节点
+            ================================================== -->
+
+            <section
+                class="round-column final-column"
+                data-stage="champion"
+            >
+
+
+                <div class="round-header">
+
+
+                    <div class="round-index">
+
+                        WINNER
+
+                    </div>
+
+
+                    <div class="round-name">
+
+                        最终结果
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div
+                    class="winner-node final-node"
+                    data-final="{{ champion }}"
+                >
+
+
+                    <div class="winner-node-label">
+
+                        CHAMPION
+
+                    </div>
+
+
+                    <div class="winner-node-name">
+
+                        {{ champion }}
+
+                    </div>
+
+
+                    <div class="winner-node-icon">
+
+                        🥊
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     THIRD PLACE
+===================================================== -->
+
+<section class="bronze-section">
+
+
+    <div class="bronze-title">
+
+        THIRD PLACE MATCH
+
+    </div>
+
+
+    <div class="bronze-result">
+
+        第三名 · {{ third_place }}
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     ACTION
+===================================================== -->
+
+<section class="actions">
+
+
+    <form
+        action="{{ url_for('restart') }}"
+        method="POST"
+    >
+
+        <button
+            type="submit"
+            class="replay"
+        >
+
+            <span>
+                再玩一次
+            </span>
+
+
+            <small>
+                REPLAY
+            </small>
+
+        </button>
+
+    </form>
+
+
+
+    <a
+        href="{{ url_for('index') }}"
+        class="home"
+    >
+
+        返回首页
+
+    </a>
+
+
+</section>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     DRAW TREE LINES
+===================================================== -->
+
+<script>
+
+function drawDecisionTree() {
+
+    const canvas =
+        document.getElementById("treeCanvas");
+
+    const svg =
+        document.getElementById("treeLines");
+
+
+    if (!canvas || !svg) {
+        return;
+    }
+
+
+    /*
+    清空旧线
+    */
+
+    svg.innerHTML = "";
+
+
+    /*
+    SVG 尺寸等于整棵树
+    */
+
+    const width =
+        canvas.scrollWidth;
+
+    const height =
+        canvas.scrollHeight;
+
+
+    svg.setAttribute(
+        "width",
+        width
+    );
+
+
+    svg.setAttribute(
+        "height",
+        height
+    );
+
+
+    svg.setAttribute(
+        "viewBox",
+        `0 0 ${width} ${height}`
+    );
+
+
+    /*
+    获得所有 Round
+    */
+
+    const columns =
+        Array.from(
+            canvas.querySelectorAll(
+                ".round-column"
+            )
+        );
+
+
+    const canvasRect =
+        canvas.getBoundingClientRect();
+
+
+    /*
+    创建 SVG path
+    */
+
+    function createPath(
+        x1,
+        y1,
+        x2,
+        y2
+    ) {
+
+        const path =
+            document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "path"
+            );
+
+
+        /*
+        做成折线式 tournament bracket
+
+        出发点
+        →
+        中间点
+        ↓
+        →
+        目标
+        */
+
+        const midX =
+            x1 + (x2 - x1) / 2;
+
+
+        const d = [
+
+            `M ${x1} ${y1}`,
+
+            `L ${midX} ${y1}`,
+
+            `L ${midX} ${y2}`,
+
+            `L ${x2} ${y2}`
+
+        ].join(" ");
+
+
+        path.setAttribute(
+            "d",
+            d
+        );
+
+
+        path.setAttribute(
+            "fill",
+            "none"
+        );
+
+
+        path.setAttribute(
+            "stroke",
+            "rgba(70,85,104,.38)"
+        );
+
+
+        path.setAttribute(
+            "stroke-width",
+            "1"
+        );
+
+
+        path.setAttribute(
+            "vector-effect",
+            "non-scaling-stroke"
+        );
+
+
+        svg.appendChild(path);
+
+    }
+
+
+
+    /*
+    每一列 → 下一列
+    */
+
+    for (
+        let i = 0;
+        i < columns.length - 1;
+        i++
+    ) {
+
+
+        const currentColumn =
+            columns[i];
+
+
+        const nextColumn =
+            columns[i + 1];
+
+
+        const currentNodes =
+            Array.from(
+                currentColumn.querySelectorAll(
+                    ".advance-node"
+                )
+            );
+
+
+        const nextMatches =
+            Array.from(
+                nextColumn.querySelectorAll(
+                    ".match-card"
+                )
+            );
+
+
+        const finalNode =
+            nextColumn.querySelector(
+                ".final-node"
+            );
+
+
+
+        currentNodes.forEach(
+            currentNode => {
+
+                const advancingName =
+                    currentNode.dataset.advance;
+
+
+                let target =
+                    null;
+
+
+
+                /*
+                如果下一列是最终冠军
+                */
+
+                if (finalNode) {
+
+                    if (
+                        finalNode.dataset.final
+                        ===
+                        advancingName
+                    ) {
+
+                        target =
+                            finalNode;
+
+                    }
+
+                }
+
+
+                /*
+                正常寻找下一轮包含这个人的 PK
+                */
+
+                if (!target) {
+
+                    target =
+                        nextMatches.find(
+                            match => {
+
+                                return (
+
+                                    match.dataset.left
+                                    ===
+                                    advancingName
+
+                                    ||
+
+                                    match.dataset.right
+                                    ===
+                                    advancingName
+
+                                );
+
+                            }
+                        );
+
+                }
+
+
+
+                if (!target) {
+
+                    return;
+
+                }
+
+
+
+                const fromRect =
+                    currentNode.getBoundingClientRect();
+
+
+                const toRect =
+                    target.getBoundingClientRect();
+
+
+
+                const x1 =
+
+                    fromRect.right
+
+                    -
+
+                    canvasRect.left;
+
+
+
+                const y1 =
+
+                    fromRect.top
+
+                    -
+
+                    canvasRect.top
+
+                    +
+
+                    fromRect.height / 2;
+
+
+
+                const x2 =
+
+                    toRect.left
+
+                    -
+
+                    canvasRect.left;
+
+
+
+                const y2 =
+
+                    toRect.top
+
+                    -
+
+                    canvasRect.top
+
+                    +
+
+                    toRect.height / 2;
+
+
+
+                createPath(
+                    x1,
+                    y1,
+                    x2,
+                    y2
+                );
+
+            }
+        );
+
+    }
+
+}
+
+
+
+/*
+页面加载时画线
+*/
+
+window.addEventListener(
+    "load",
+    () => {
+
+        setTimeout(
+            drawDecisionTree,
+            120
+        );
+
+    }
+);
+
+
+
+/*
+窗口尺寸变化重新画
+*/
+
+let resizeTimer;
+
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        clearTimeout(
+            resizeTimer
+        );
+
+
+        resizeTimer =
+            setTimeout(
+                drawDecisionTree,
+                150
+            );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
